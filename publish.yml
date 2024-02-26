@@ -1,0 +1,38 @@
+variables:
+  script_build: "Scripts\\build.ps1"
+  #Pipeline 1
+  pipeline_1: "Pipeline 1"
+  pipelineSource_1: "Pipeline Source 1"
+  jsonFile_1: "Apps\\app1.json"
+  #Pipeline 2
+  pipeline_2: "Pipeline 2"
+  pipelineSource_2: "PipelineSource 2"
+  jsonFile_1: "Apps\\app2.json"
+
+resources:
+  pipelines:
+  - pipeline: ${{ variables.pipeline_1 }}
+    source: ${{ variables.pipelineSource_1 }}
+    trigger: true
+  - pipeline: ${{ variables.pipeline_2 }}
+    source: ${{ variables.pipelineSource_2 }}
+    trigger: true
+  #you can expand as many pipelines as you want here
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: ${{ variables.pipeline_1 }}
+  inputs:
+    targetType: 'filePath'
+    filePath: ${{ variables.script_build }}
+    arguments: '-JsonFilePath "${{ variables.jsonFile_1 }}"'
+  condition: eq(resources.pipeline.${{variables.pipeline_1}}.result, 'Succeeded')
+
+- task: ${{ variables.pipeline_2 }}
+  inputs:
+    targetType: 'filePath'
+    filePath: ${{ variables.script_build }}
+    arguments: '-JsonFilePath "${{ variables.jsonFile_2 }}"'
+  condition: eq(resources.pipeline.${{variables.pipeline_2}}.result, 'Succeeded')
