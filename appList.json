@@ -1,0 +1,24 @@
+{
+    "Apps": [
+        {
+            "IntuneAppName": "App1",
+            "AppPublisher": "AppPublisher",
+            "AppSource": "StorageAccount",
+            "AppID": "",
+            "AppFolderName": "App1",
+            "AppSetupFileName": "App1.exe",
+            "StorageAccountName": "StorageAccountName",
+            "StorageAccountContainerName": "App1"
+        },
+        {
+            "IntuneAppName": "App2",
+            "AppPublisher": "AppPublisher",
+            "AppSource": "StorageAccount",
+            "AppID": "",
+            "AppFolderName": "App2",
+            "AppSetupFileName": "App2.exe",
+            "StorageAccountName": "StorageAccountName",
+            "StorageAccountContainerName": "App2"
+        }
+    ]
+}
